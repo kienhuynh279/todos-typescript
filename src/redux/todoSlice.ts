@@ -1,6 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { getActiveElement } from '@testing-library/user-event/dist/utils';
-import { stat } from 'fs';
 import { v4 as uuidv4 } from 'uuid';
 
 export interface TodoState {
@@ -32,23 +30,23 @@ export const todoSlice = createSlice({
         addTodo: (state, action: PayloadAction<TodoState>) => {
             state.todoList.push(action.payload)
         },
-        uploadTodo: (state, action: PayloadAction<TodoState>) => {
+        updateTodo: (state, action: PayloadAction<TodoState>) => {
             const {
                 payload: {id, desc, completed},
             } = action;
 
-            state.todoList = state.todoList.map((book) =>
-                book.id === id ? { ...book, desc, completed } : book,
+            state.todoList = state.todoList.map((todo) =>
+                todo.id === id ? { ...todo, desc, completed } : todo,
             )
         },
 
-        deleteBook: (state, action: PayloadAction<{ id: string }>) => {
+        deleteTodo: (state, action: PayloadAction<{ id: string }>) => {
             state.todoList = state.todoList.filter((todo) => todo.id !== action.payload.id);
           },
     }
 })
 
-export const { addTodo, uploadTodo, deleteBook } = todoSlice.actions
+export const { addTodo, updateTodo,  deleteTodo} = todoSlice.actions
 
 export default todoSlice.reducer
 

@@ -1,17 +1,21 @@
 import { Container } from '@mui/material';
+import { Route, Routes } from 'react-router-dom'
 import './App.css';
-import { Header, Footer } from './components/common';
-import { TodoItem, TodoList } from './features/todos'
+import { AddTodo, TodoList } from './features/todos'
 
 function App() {
   return (
-    <div className="App">
-      <Container maxWidth="lg">
-        <TodoList></TodoList>
-        <TodoItem></TodoItem>
-      </Container>
+      <>
       
-    </div>
+        <Container maxWidth="lg">
+         <h1>Todos App</h1>
+          <Routes>
+            <Route path="/*" element={<TodoList />}></Route>
+            <Route path='/add_todo' element={<AddTodo></AddTodo>}></Route>
+            <Route path="/update_todo/:id" element={<AddTodo></AddTodo>} />
+          </Routes>
+        </Container>  
+      </>
   );
 }
 
